@@ -32,5 +32,19 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+
+        if(Lives <= 0)
+        {
+            Time.timeScale = 0;
+            CurrentState = GameState.GameOver;
+        }
+    }
+    public static void UpdateLive()
+    {
+        Lives -= 1;
+    }
+    public static void UpdateScore()
+    {
+        Score += 1;
     }
 }

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Vector3 MoveDirection = Vector3.zero;
     private Transform playerMesh = null;
     private Animator thisAnimator = null;
+    public GameObject Explosion;
 
     private float moveSpeed = 0.05f;
 
@@ -53,5 +54,13 @@ public class Player : MonoBehaviour
         thisController.Move(MoveDirection);
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -1.5f, 1.5f), transform.position.y, transform.position.z);
     }
-
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Obstacle")
+        {
+            Destroy(other.gameObject);
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            HUD.HUDManager.UpdateLives();
+        }
+    }
 }
